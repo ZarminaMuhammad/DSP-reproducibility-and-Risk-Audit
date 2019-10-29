@@ -1,0 +1,577 @@
+---
+title: "Quantified Self"
+author: "Zarmina Muhammad"
+date: "28 October 2019"
+output: html_document
+
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+![](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_1.jpg)
+
+# Introduction
+The Quantified Self is a word that embodies, “self-knowledge through numbers (Ferriss,2013).
+This term was made popular in 2007 by Gary Wolf, that explains incorporation of technology into data acquisition on aspects of a person’s daily life.  The tracking the details of a person’s daily life to find patterns or to determine causation has become quite popular since then, but originally the term became popular when Wolf first described it as the intersection of data and self-improvement.
+The overall intent of this assignment carried out by our team “AIrborne Analytics”, was to collect and then share data measures about ourselves, over a four-week period time.
+
+## The issue we want to resolve is;
+How mood is affected by the digital screen time and is there any relationship between the two parameters? 
+The overall intent of this assignment carried out by our team “AIrborne Analytics”, was to collect and then share data measures about ourselves, over a four-week period time and to determine the relationship between mood and screentime. 
+For this analysis, we added different other parameters down the track like academic events (assignment deadlines) to determine its effect on the mood of a person.
+
+## Hypothesis
+Based on reports in popular media (Alltucker, Ken.2019), we hypothesised that digital addiction can negatively affect mood. The most intuitive way to collect digital addiction data seemed to be via an app which measures mobile phone usage and time spent on particular apps. 
+Also, in this study we discussed that along with the screen usage, how other factors like academic workload (Events) in the forma of assignment deadline adds an impression (awful, neutral, happy) to your mood. A measurement of daily mood was collected through a self-report form via google sheets (Appendix-A2).
+
+## Group Communication
+Slack team, “AIrborne Analytics” was established on the “#slack” (https://slack.com), so assignment issues and ideas could be quickly shared amongst all team members. 
+At our first team considered several different options for collecting personal data and several apps were tried and reviewed in order to improve the reliability of their data collection methods. Several issues arouse with the smartphone applications due to the difference in the smartphone gadget, so after trials “Moment App” was selected as the application for collecting phone usage data as this app works both for android systems and iPhone. 
+The datasets and methods listed in the following table were agreed and our team recorded data from March 24rd to April 28th, 2019.  We also created a “Data Plan” which was uploaded to our Google Drive and specified what data has to be collected and how. 
+
+# Description of Process
+
+## Data Collected: 
+
+### Structured Data
+
+**Screen Usage**
+To measure smartphone usage, we experimented with several apps. The app had to satisfy the following two conditions:
+* Functional across iPhone and Android platforms (The app Moment was suggested and selected.)
+* The data derived should make sense 
+
+**Moment Data**
+Moment data was required to determine the app usage time by each user over a period of specific time for finding the impact of that time on a person’s mood. As Moment exports data as Json, that has hierarchical format so we converted the json to Excel by using Json to excel converter (Link: http://convertcsv.com/json-to-csv.htm and https://json-csv.com/.)
+
+**Data Frequency:** The data needed to be aggregated to daily frequency starting from 25th of March for a period of five weeks. Each team members extracted their own data and then send it to the Google Sheets template on the shared folder on google drive. Once the data collection was done then all individual data sets are consolidated into an output google sheet. This output sheet was designed to output in normalised database format, and contained the following fields.
+
+* Team Member (Anonymised)
+* Date
+* App Name: we note that some apps, like Lock Screen, Package installer, and System UI, were excluded as these were not actively used by the team member (passive usage). Each user needed to elect what passive apps were present on their device
+* OnScreen time In Seconds
+
+**Events**
+Events include the countdown for academic assignments for all the three courses STDS, DSI, DAM, the users are taking this semester. This feature really has an important role in mood analysis, as all the users are enrolled in at least two courses this semester. So, our aim was to determine how the deadlines for different assignments affect the mood of a person and too what level. As there are people who are not affected by deadlines and daily life challenges but others are greatly affected by approaching deadlines and tasks (Mentally and physically).
+
+### Unstructured Data
+Mood Data: The state of mind/ feeling of the user was noted at a specific time of the day, to figure out if it affected by the factors like phone usage or the assignment deadline approaching. Also, one’s mood is greatly influenced by where (Location) that person is; suppose at University late night one would be exhausted, at home maybe a person is doing well than any other place and so on.
+ 
+Collection of Mood Data: Google Forms was used to create a “Mood Form” which collected the mood of the person in free form text. The mood entries were performed at 9pm every night, to measure cumulative impact on any digital addiction from during the day. The google sheet behind the google form captured the following fields
+
+* Timestamp (9:00 pm)
+* Email
+* Mood: free text (fully unstructured rather than from a drop down)
+* Location: e.g. At work, At Home, etc (This plays a role in the person’s feeling to a greater extent as well)
+
+### Individual Data
+My google timeline data to determine how many location points Google had saved about me. Getting the statistics of my timeline to determine the number of points, google has collected about me per day, per month and per year. 
+Also generating heatmaps of where I travelled across the globe and frequency of travel. 
+
+## Data Storage:
+Google Drive was used for all shared information and each team member uploaded the data they had collected.  The datasets were small enough to be uploaded onto individual “Google Sheets” as Excel documents, without any problems.  The data was then combined into one Excel workbook, with one spreadsheet per dataset containing the combined data for all team members. 
+
+## Data quality & collection issues:
+Everyone in the team is happy with the general idea of collecting phone usage data and checking if mood is influenced by that. 
+The data collection process seems smooth as well but there was a bigger challenge with the quality of data than we first expected.  We expected that the Smartphone applications would perform efficiently but this was often far from the case. 
+
+# Outliers & Missing data:
+Before the analysis the entire data set was cleaned and consolidated into a single datafile, on the basis of unique user_id assigned to each user in the datasets
+
+**Moment Dataset:** Outliers and discrepancies (such as time spent on phone being 26 hours in a day, background apps being most used on a regular basis, etc) are being called out as and when noticed, were removed. Also, there were many background apps observed with high value of screen time in sec, so that was adjusted (Background value= 0 for app categories such as tools and system). These values are considered as outliers due to their unexceptional high value
+
+**Mood Dataset:** There were some missing values observed because the user might have forgot to submit the mood entries on any specific date. Also, the start dates of data collection are different for all users that’s why there are missing entries in the initial few days for two of the users. In that case the data set is selected from 24th of March for all users (data present for all users). Those missing values were imputed by the mode of mood for that specific user. 
+
+## Data Ethics- (Data anonymity):
+Each team member was assigned a user number (1, 2, 3 & 4) Initially there were 6 group members but two of the members dropped leaving behind just four of us, and a unique user_id (by combining User # and Date) was generated in order to determine if multiple entries exist for a single day.  In the final consolidated data set for analysis the names of team members are not mentioned to maintain the anonymity of the team members (Data ethics). The anonymity of users helps maintain the personal identity, their psychological behaviour, the places they have been to, and their feedback on the mood survey protected with in the group as well as from other people who have access to the data and this analysis. And so, the chances of misusing this data and disclosing user information would not be possible. 
+The user information has been removed from the moment data as well for this analysis to preserve the personal identity of each individual user. Also doing so, would not identify specific user and the most frequently apps being used by them in this analysis. As moment has access to entire phone features so globally chances of data breaching are possible, however in this specific analysis masking user identity helps protecting user’s information and activities.
+Masking the user names and email addresses form the events data, also helps protect the user form being exposed.
+
+
+## Analysis of Data Quality Issue:
+Due to the significant under collection of data for 23rd March and 28th April by two of the users, I decided to remove this incomplete data set from the analysis moving forward, I have selected the data from march 24th to April 28th, 2019.
+
+# Analysis
+
+*Tools used for data analysis*
+* Microsoft Excel: Dataset arrangement and consolodation
+* Tableau: group data
+* R: Individual data
+
+## Discussion & Conclusions
+The analysis of the outliers and missing data revealed that we had some significant problems with the reliability and accuracy of our data recording.  It was somewhat ironic that the automated smartphone applications were in fact the least reliable for some team members for recording data. 
+
+### Moment Dataset:
+**Question: Is there a relationship between the distribution of screentime Vs app_categories for different users?**
+
+**Findings & Conclusions:** As outlined in Fig.1. Avg-screentime for specific category varies from user to user based on the interest, demands and personal activities of individual user. From the figure the Avg-screentime recorded for social apps are generally higher than other users except user 3 that has a high reference app than social. In this case we can also conclude that since most of our assignment related and group conversations were through WhatsApp and other social app, so this could be one of the reasons of its high usage (usually high before assignment deadlines). However on the other side reference app includes apps like slack or other app that we use for our assignment conversations and work related, so it seems like user 3 has already installed this app on his/her phone (As user 3 has the highest screen time for reference, even than social). From the figure, in comparison to all other users, user 4 has a lower screen usage and User 3 has the highest recorded time (Appendix).
+
+![Fig. 1 Av-Screentime distribution across each user and category](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_02.png)
+
+**Question: Is there a relationship between Mood (self-rated) and Phone screentime(Horwood, 2019)?**
+
+Studies shows;
+***“Increased duration of mobile phone use is associated with unfavourable psychological mood, in particular, a depressed mood.”(Kayoko Ikeda,2014)***
+Comparing the screentime on the phone each day against the team and its effect on mood revealed several insights that I was not expecting and very different from what studies reveal (Kayoko Ikeda,2014), are shown below:
+
+**Findings & Conclusions:**  As outlined in Fig.2a there is no negative effect of screentime upon self-rated mood however it also must be noted that positive moods are largely observed for Avg_screentime for all users. 
+At this stage I was yet to determine the accuracy of the sentiment score applied to the unstructured data set (Mood notes), or the accuracy of the determining screentime by the Moment app, therefore this also serves as a sense check of analysis using large datasets (global level analysis).
+From table 1(Appendix), -1, 0 and +1 values are assigned to different mood types classifying it as awful (Sad), Neutral and Happy (Excited). In Fig 2a, the relationship between average screentime and different mood types for each user are plotted. From the figure, it shows that;
+
+* User 1 has a slightly higher positive mood, however neutral and awful mood is almost the same (Based on Avg_screentime)
+* User 2 has the highest screen time with a neutral mood and awful and positive moods have almost the same screentime values recorded.
+* User 3 comparatively has a higher screen time recorded for mood type “1” (Happy), declared the happiest of all the team members (Fig 2b- strong positive correlation of Screentime and positive mood).
+* User 4 has a balanced but low screentime for both negative and positive moods, however this user has a relatively lowest screentime recorded for neutral mood as well.
+
+![Fig. 2a Av-Screentime and mood distribution for each user](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_3.png)
+
+![Fig. 2b Mood and Screentime correlation per User](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_4.png)
+
+Comparing the time spent on the phone each day against the team average revealed several insights that I was not expecting and its effect on mood (Appendix-A3_1).
+
+### Mood Dataset:
+**Question: Is there any effect on the Mood (self-rated) and the place where the user is?**
+
+The Mood dataset required manual data recording at set time period per day with a location entry. Looking at the figure (Mood vs Location), it is clear that some team members got close to this, but were often entering a standard response each time, and maybe not putting in the thought required.  Alternatively, it is possible that any team member with a bad mood would not want to record low moods into this dataset.  In hindsight, we did not discuss this issue in our team and it is a difficult one to comment at this stage.
+Surprisingly for me, it actually took some thought to work out what my mood was and initially I often found myself entering the same as I had entered previously because I didn’t feel any different to the previous data entry time.  No doubt others are more in touch with their mood and may therefore also have wider variations in readings than I had.  From my experience, there is clearly a lot of variance in people’s susceptibility to mood changes and surprisingly I couldn’t see that sort of variance in the mood in our analysis.  
+
+**Findings & Conclusions:** As outlined in Fig.3, Using and comparing this sort of subjective data is always going to be difficult to draw meaningful conclusions. However, the analysis surprisingly shows a higher positive mood at all locations. Form the figure 3a, we can say that the “+1” value that is the overall positive mood value recorded at different locations is higher than the overall awful and neutral mood values. The figure also provides insights about a higher count of positive mood for users at home and then at University (The rest of the locations are filtered out due to relatively lower mood values for all mood types and only few including home and university are selected).
+
+![Fig. 3a Mood distribution across different locations](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_5.png)
+
+![Fig. 3b Mood distribution across different locations for each user](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_6.png)
+
+As clear from Fig 3a, that user location home has the highest recorded positive mood with respect to other location. Figure 3b, shows than among all users, user 2 has the highest recorded positive mood at home followed by user 1. 
+
+### Events Dataset:
+**Question: Is there any effect on the Mood (self-rated) upon the event (academic deadlines) taking place?**
+
+The events variables were added to the analysis in a very later stage, to figure out if our moods have been affected by the academic assignment deadlines we had. I was also keen to figure out how my mood has responded to the deadlines as I being new to this field, study load was affecting me inside out. But just like all other team members the mood observed in response to these events remained unaffected irrespective of the rough time I have been through meeting all those deadlines.
+
+**Findings and Conclusions:** Fig 4 shows the mood distribution across different events for all users. Also, from Fig A3-g(Appendix), it is clear that an overall positive mood has been observed is response to all the academic events that includes countdown of subject assignment. The fig below shows that an overall positive mood has been recorded by all users. 
+
+* User 1 has an overall positive mood over negative mood.
+* User 2 however has a very slight difference between the positive and negative mood but still this user has the highest positive mood recorded except for DAM, where the negative mood is slightly higher than positive. 
+* For User 3 the figure shows the STD Due as an empty plot, with no observations recorded. This could be due to the reason that for this semester user 3 has not enrolled for the course and so we have no observations being shown. Overall User 3 has a higher positive over negative mood 
+* User 4 has a higher positive mood recorded for all the 3 events.
+
+![Fig. 4 Mood distribution across different academic events](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_7.png)
+
+
+## Individual Dataset
+
+**Question: Is it true my phone keeps a map that tracks my whereabouts? Why, and if so, how can I see it?** **_(J. D. Biersdorfer, 2017)_**
+**Findings:** To find an answer to this question, I dig into my location history, to check what google has been recording about me for all these years since I am using a smart phone, and the results were surprisingly amazing than anticipated.
+What I found:
+
+**Question: For how long has google been collecting my Data?**
+
+**Findings:** From the google timeline analysis it has been shown that google has been collecting my data from Nov 2014 – present. However, this analysis has the data collected from Nov-2014 to May 2019(Appendix A3-e).
+
+**Question: What places I have visited around the globe, what locations?**
+
+**Findings:** Using my timeline data, I came to know about the places I have visited. Fig 5, shows the heat map of my visited places with the counts showing the number of data points google has collected about me. Zooming each location would give further information about the places I have been to in that specific locations, and as google is linked to my gallery and photos so it even provides me the snapshot and memories associated to that location that I have saved on my phone.
+
+
+```{r setup_libs, include=FALSE}
+knitr::opts_chunk$set(warning = TRUE, echo = FALSE)
+library(tidyverse)
+library(jsonlite)
+library(ggplot2)
+library(ggmap)
+library(gganimate)
+library(gifski)
+library(zoo)
+library(lubridate)
+library(raster)
+library(dplyr)
+library(leaflet)
+library(leaflet.extras)
+library(stringi)
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+system.time(x <- fromJSON("C:/Users/Public/MDSI/SEM1/DSI/at2/location data-final/takeout-May/Takeout/Location History/Location History.json"))
+
+
+# extracting locations of data frame
+loc= x$locations
+#summary(loc)
+#head(loc)
+#converting time colum from posix millisecond into readible time frame
+loc$time= as.POSIXct(as.numeric(x$locations$timestampMs)/1000,origin = "1970-01-01")
+
+#converting longitude and latitude from E7 to GPS Coordinates
+loc$lat= loc$latitudeE7 / 1e7
+loc$lon= loc$longitudeE7 / 1e7
+
+#head(loc)
+
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Mapping the places I have visited
+
+##Extract just the location and time vectors as that is my main interest here, and add the accuracy reading
+##for location in case I need to check for dodgy data
+locvis<- loc %>%
+  mutate(lat = latitudeE7 / 10000000, lon = longitudeE7 / 10000000) %>% 
+  mutate(timestampMs = as.numeric(timestampMs)) %>%
+  mutate(Date = as.POSIXct(timestampMs/1000, origin="1970-01-01"))
+
+locvis1=locvis[,10:12]
+locvis1$accuracy = locvis$accuracy
+#head(locvis1,10)
+
+
+myMap = leaflet(locvis1) %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  fitBounds(~min(lon), ~min(lat), ~max(lon), ~max(lat)) %>%  
+  addHeatmap(lng = ~lon, lat = ~lat, group = "HeatMap", blur = 20, max = 0.01, radius = 15) %>%
+  addMarkers(data = locvis1, ~lon, ~lat, clusterOptions = markerClusterOptions(), group = "Points")
+
+myMap
+```
+
+Fig 5. Data points google has collected about me
+
+```{r Places I have Visited, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+locvis1 = locvis1[!locvis1$lat>0,]
+
+myMap = leaflet(locvis1) %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  fitBounds(~min(lon), ~min(lat), ~max(lon), ~max(lat)) %>%  
+  addHeatmap(lng = ~lon, lat = ~lat, group = "HeatMap", blur = 20, max = 0.01, radius = 15) %>%
+  addMarkers(data = locvis1, ~lon, ~lat, clusterOptions = markerClusterOptions(), group = "Points")
+
+myMap
+```
+
+```{r include=FALSE}
+# How many data points did Google record over what period of time
+nrow(loc)
+min(loc$time)
+max(loc$time)
+
+# How are they dssributed over days, months and years
+loc$date<- as.Date(loc$time, '%Y/%m.%d' )
+loc$year<- year(loc$date)
+loc$month_year <- as.yearmon(loc$date)
+
+points_p_day <- data.frame(table(loc$date), group= "day")
+points_p_month <- data.frame(table(loc$month_year), group="month")
+points_p_year<- data.frame(table(loc$year),group="year")
+
+# how many days, months and years were recorded?
+nrow(points_p_day)
+nrow(points_p_month)
+nrow(points_p_year)
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+
+# set up plotting theme
+
+my_theme <- function(base_size = 12, base_family = "sans"){
+  theme_grey(base_size = base_size, base_family = base_family) +
+    theme(
+      axis.text = element_text(size = 12),
+      axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+      axis.title = element_text(size = 14),
+      panel.grid.major = element_line(color = "grey"),
+      panel.grid.minor = element_blank(),
+      panel.background = element_rect(fill = "aliceblue"),
+      strip.background = element_rect(fill = "lightgrey", color = "grey", size = 1),
+      strip.text = element_text(face = "bold", size = 12, color = "navy"),
+      legend.position = "right",
+      legend.background = element_blank(),
+      panel.spacing  = unit(.5, "lines"),
+      panel.border = element_rect(color = "grey", fill = NA, size = 0.5)
+    )
+}
+
+```
+
+
+
+**Question: How many data points (per day, per month, per year) did google recorded (Fig 5)?**
+
+Google stores my location points from the time when I open my phone since the first day I have starting using google on my phone. Using timeline data, I can see the time of day that I was in a specific location and how long it took me to get to that location from my previous one.
+**Findings:** Fig 6 shows the number of data points that google has collected about me. The data points mean that how many location points has google collected about me on daily, monthly and yearly basis. The accuracy of these data points being collected by google timeline is shown.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
+points<- rbind(points_p_day[,-1],points_p_month[,-1],points_p_year[,-1])
+
+ggplot(points, aes(x = group, y = Freq)) + 
+  geom_point(position = position_jitter(width = 0.2), alpha = 0.3) + 
+  geom_boxplot(aes(color = group), size = 1, outlier.colour = NA) + 
+  facet_grid(group ~ ., scales = "free") + my_theme() +
+  theme(
+    legend.position = "none",
+    strip.placement = "outside",
+    strip.background = element_blank(),
+    strip.text = element_blank(),
+    axis.text.x = element_text(angle = 0, vjust = 0.5, hjust = 0.5)
+  ) +
+  labs(
+    x = "",
+    y = "Number of data points",
+    title = "How many data points did Google collect about me?",
+    subtitle = "Number of data points per day, month and year",
+    caption = "\nGoogle collected between 0 and 1500 data points per day
+    (median ~400), between 0 and 30,000 per month (median ~10,000) and 
+    between 80,000 and 250,000 per year (median ~100,000)."
+  )
+```
+
+
+**How accurate is the location data?**
+
+
+```{r Determining accuracy of google data, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# determing accuracy of the data
+
+accuracy <- data.frame(accuracy = loc$accuracy, group = ifelse(loc$accuracy < 800, "high", ifelse(loc$accuracy < 5000, "middle", "low")))
+accuracy$group <- factor(accuracy$group, levels = c("high", "middle", "low"))
+
+ggplot(accuracy, aes(x = accuracy, fill = group)) + 
+  geom_histogram(mapping = NULL, data = NULL, stat = "bin",
+                 position = "stack",binwidth = 2500, bins = NULL,
+                 na.rm = FALSE, show.legend = NA, inherit.aes = TRUE) + 
+  facet_grid(group ~ ., scales="free") + 
+  my_theme() +
+  theme(
+    legend.position = "none",
+    strip.placement = "outside",
+    strip.background = element_blank(),
+    axis.text.x = element_text(angle = 0, vjust = 0.5, hjust = 0.5)
+  ) +
+  labs(
+    x = "Accuracy in metres",
+    y = "Count",
+    title = "How accurate is the location data?",
+    subtitle = "Histogram of accuracy of location points",
+    caption = "\nMost data points are pretty accurate, 
+but there are still many data points with a high inaccuracy.
+    These were probably from areas with bad satellite reception."
+  )
+```
+
+Fig 6. The accuracy of google timeline data
+
+**Question: Distance travel in specific timeframe?** 
+**Findings:** Initially my focus was to determine this point only and then finding a connection to my visited places with my mood and screentime (structured/unstructured group datasets for the month of March and April 2019. Fig 7 shows the Monthly distance I travelled from Jan 2018 to Feb 2019. the month of June 2018 and Feb 2019 shows a higher distance travelled and that is because I was on vacations in these specific months.
+
+```{r Distance_travelled_from_Jan2018_to_May_2019, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# What distance did I travel in march 2019- may 2019
+
+loc3 <- with(loc, subset(loc, loc$time > as.POSIXct('2018-01-01 0:00:01')))
+loc3 <- with(loc, subset(loc3, loc$time < as.POSIXct('2019-05-05 23:59:59')))
+
+# Shifting vectors for latitude and longitude to include end position
+shift.vec <- function(vec, shift){
+  if (length(vec) <= abs(shift)){
+    rep(NA ,length(vec))
+  } else {
+    if (shift >= 0) {
+      c(rep(NA, shift), vec[1:(length(vec) - shift)]) }
+    else {
+      c(vec[(abs(shift) + 1):length(vec)], rep(NA, abs(shift)))
+    }
+  }
+}
+
+loc3$lat.p1 <- shift.vec(loc3$lat, -1)
+
+loc3$lon.p1 <- shift.vec(loc3$lon, -1)
+
+# Calculating distances between points (in metres) with the function pointDistance from the 'raster' package.
+loc3$dist.to.prev <- apply(loc3, 1, FUN = function(row) {
+  pointDistance(c(as.numeric(as.character(row["lat.p1"])),
+                  as.numeric(as.character(row["lon.p1"]))),
+                c(as.numeric(as.character(row["lat"])), as.numeric(as.character(row["lon"]))),
+                lonlat = T) # Parameter 'lonlat' has to be TRUE!
+})
+
+# distance in km
+
+dist_km <-round(sum(as.numeric(as.character(loc3$dist.to.prev)), na.rm = TRUE)*0.001, digits = 2)
+#dist_km
+
+distance_p_month <- aggregate(loc3$dist.to.prev, by = list(month_year = as.factor(loc3$month_year)), FUN = sum)
+distance_p_month$x <- distance_p_month$x*0.001
+
+distance_p_days <- aggregate(loc3$dist.to.prev, by = list(date = as.factor(loc3$date)), FUN = sum)
+distance_p_days$x <- distance_p_days$x*0.001
+
+
+ggplot(distance_p_month[-1, ], aes(x = month_year, y = x,  fill = month_year)) + 
+  geom_bar(stat = "identity")  + 
+  guides(fill = FALSE) +
+  my_theme() +
+  labs(
+    x = "",
+    y = "Distance in km",
+    title = "Distance traveled per month from Jan 2018- may 2019",
+    caption = "This barplot shows the sum of distances between recorded 
+    positions for 2018& 2019. In June 2018 I went on vacations
+    Missing Entries for March and April, 2019: My location was turned off"
+  )
+```
+
+Fig 7. Distance travelled from Jan 2018- May 2019- 
+
+From this graph, we can see that there is no data from march to May for distance measure. Fig 8, shows the heat map of my commute during the month of March and April, 2019. From the figure its clear that the place I travelled the most from my home is UTS (Central), that clearly describes my travel frequency to University in these months. To every location point a value id assigned that shows the number od data points that google has collected about me on those specific location throughout this time.  The colour of the heat map depicts the number of times I have been to that place or the time interval I have spent there. The more intense the colour is the more data points I would have for that location.
+Along with the location information google also tells about what mode of commute I had at that specific location (by car, bus, bicycle, walk, airplane etc). it also tells about the places where I ate, where I stopped, what shopping malls I visited, where I stayed etc.
+
+![Fig 8: Heat Map of my Commute in March and April 2019](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_11.png)
+
+# Discussion & Reflection
+I have gained 1st hand insight into the many challenges and opportunities from this project regarding ‘The Quantified Self’, and its accompanying data. Using data sciences and technologies today we are able to leverage on real time information and continuous feedback loops. With constant evolution of better and faster technologies, there are varied number of implications for data storage, manipulation and analysis and where there are new concerns for privacy and ethical obligations towards societies.  
+
+## Data Science Domain:
+Another key learning where we could have put a bit more effort is try to find out few other parameters that would have helped finding relationship between mood and screentime.
+Regarding ethical obligations, access to data by 3rd parties, and potential use of that data for a purpose other than its intended use (including re-identification) is a serious issue, in particular for researchers, as discussed by Roy (2017). In addition, using mobile technology for data collection, considerations such as data security, access to customers’ personal data, crime implications, and miscellaneous uses of data for racial and demographic profiling should be taken seriously into account. 
+
+My personal experience of recording my daily mood was a tendency to avoid having the extreme ends of the spectrum; ‘awful’ and ‘rad’, and which was reflected in the group’s combined data. Whilst changing the content of my mood notes in the data, I knew that my group would be analysing the one I provided as what my actual content should be. Therefore, same phenomena was explored by Kim (2014) where according to him ‘self-tracker’ users falsified records and altered daily behaviours in the study, both intentionally and unintentionally. 
+Similarly, amount of time spent on checking, manually overriding and converting data (when contrasted with the minimal conclusions) can be drawn from the data. This has caused me to discuss the implications of large sets of ‘quantified self’ data. According to Swan (2013), the objective of many quantified self-projects is to find the exception, rather than the rule, and involves working through a lot of collected data in order to find them.
+
+I would also highlight that I found no negative relationship between mood and screentime in the group or individual dataset. This may be due to the small sample size; therefore it is challenging to determine trends. In case if trends are present, they are unlikely to be statistically significant. 
+
+Also, relationship between mood and screen time (from Moment recordings) cannot only be calculated by a single mood entry per day however it requires a huge number of parameters to be considered and data collection to be monitored. Moving forward, in case if I will get an opportunity to run this project again, my objective would be to record mood fluctuations against a moving average. This is to ensure that more effectively measurements are recorded against activities and external influencing factors.
+From this experience the insight I have gained is, in order to find a relationship between mood and screen time, few of the following important parameters affecting mood (larger population) should also be determined to get significant outputs
+
+* Age (All tucker, Ken.2019)
+* Occupation and wellbeing (Horwood, 2019)
+* Lifestyle (Chicago Tribune, 2018)
+* Health (tensions & excitements)
+* Mobile/tablet usage (Roy, A. L. 2017)
+* Extracurricular & social activities (Kim, J 2014)
+
+## Personal Domain:
+I was slightly sceptical in the initial phase of this assignment and also about learning anything meaningful regarding my personal mood vs screentime/location/events. I have diligently recorded both manual mood data and have kept a close track of moment data, and hence I believe that my data was as accurate.
+
+The effects of sleep on negative mood: evidence suggest that when people are sleep deprived, they feel more irritable, angry and hostile (Amie M. Gordon, 2013). As I suffer from insomnia, so according to this analysis I should have a more negative mood, however that is not the case observed, and so requires a lot of work to be done based on quality of data being collected in this domain.
+
+As per this analysis, results from my screen time has not affected my mood, however my screentime recorded is significantly higher than one should normally have and where this should be addressed in order to have a healthier lifestyle (Chicago Tribune, 2018).
+
+We also have concluded that there is some sort of positive relationship between Mood and screentime as studies show,
+**_"For what we term 'communication use' - calls and text messages - we found a slight positive association with wellbeing"(Horwood, 2019)_**
+ this however led to further exploration in this domain. 
+ 
+One of the key challenges, I found was the lack of baseline for group data. Attempting to draw conclusions from data without this, felt very counterintuitive. 
+
+In a similar future project, I would record my baseline before adding the new test element, and may request other group members to do the same. We had limited amount of time to collect the data, however I would also like to focus to capture information over a longer period of time with multiple parameters.
+
+Note: The analysis has no sensitive information given regarding the user’s data being used. This report does not expose and intend to expose sensitive categories of personal data and is in accordance with the principals of data protection. 
+
+
+# References
+1.	(Ferriss,2013): Ferriss, Tim (2013-04-03). "The First-Ever Quantified Self Notes (Plus: LSD as Cognitive Enhancer?)". The Blog of Author Tim Ferriss. Retrieved 2019-04-18.
+2.	 (Alltucker, Ken.2019): https://www.npr.org/sections/health-shots/2019/03/14/703170892/a-rise-in-depression-among-teens-and-young-adults-could-be-linked-to-social-medi
+3.	(Kayoko Ikeda,2014): https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4019756/
+4.	(J. D. Biersdorfer, 2017): https://www.nytimes.com/2017/01/20/technology/personaltech/how-your-phone-knows-where-you-have-been.html
+5.	(Roy, A. L. 2017): Roy, A. L. 2017, 'Innovation or Violation? Leveraging Mobile Technology to Conduct Socially Responsible Community Research', American  Journal of Community Psychology, vol. 60, pp. 385-390.
+6.	(Kim, J 2014): Kim, J 2014, 'A qualitative analysis of user experiences with a self-tracker for activity, sleep, and diet', Interactive Journal Of Medical Research, vol.3, no. 1, p. E8
+7.	(Swan, M., 2013): Swan, M., 2013, 'The Quantified Self: Fundamental Disruption In Big Data Science And Biological Discovery', Big Data, Vol. 1 No. 2
+8.	 (Amie M. Gordon, 2013): https://www.psychologytoday.com/au/blog/between-you-and-me/201308/all-night-the-effects-sleep-loss-mood
+9.	(Chicago Tribune, 2018) Mobile phones linked to anxiety and severe depression in teens (https://yp.scmp.com/news/features/article/108242/mobile-phones-linked-anxiety-and-severe-depression-teens)
+10.	(Horwood, 2019): https://www.deakin.edu.au/about-deakin/media-releases/articles/world-first-study-shows-link-between-phone-use-and-lower-wellbeing
+
+# Appendix
+
+## Datasets:
+
+### Final dataset
+
+![Fig. A1-a Final dataset(consolidated)](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_12.png)
+
+
+
+### Moment dataset
+![Fig. A1-b Moment dataset](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_13.png)
+
+
+
+### Mood dataset
+![Fig. A1-c Mood dataset](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_14a.png)
+
+
+
+### Events dataset
+![Fig. A1-d Events dataset](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_15.png)
+
+
+
+## Mood Doc_file
+![Fig. A2 Google doc form for Mood submission](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_16.png)
+
+
+## Visualizations:
+
+### Mood and Screentime
+
+![Fig. A3-ai Distribution of mood across screentime](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_17.png)
+
+
+![Fig. A3-aii Distribution of mood across screentime](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_18.png)
+
+
+
+
+### Overall mood calculated for all users
+All mood entries were assigned -1, 0 and 1 values
+
+* Awful = “-1”
+* Normal = “0”
+* Good = “1”
+And these values were applied to the entire dataset in a new column “mood_values” based on the mood entries.
+
+
+Feeling   | Mood    | 3-Scale Category   | Score
+----------|---------|--------------------|--------
+Aweful    | Bad     | Negative           | -1
+Meh       |         | Neutal             |  0
+Good      | Rad     | Positive           | +1
+
+
+
+
+### Mood, screen time distribution over a period of one month for all users
+![Fig. A3-b: Mood effect on screen time for all users on daily basis](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_20.png)
+
+
+
+
+### Mood, screentime and no of reocrds
+
+![Fig. A3-c Mood, screentime and no of records](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_21.png)
+
+
+
+### Number of data points google has collected about me?
+
+![Fig. A3-e: Distance travelled in Km](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_23.png)
+
+
+
+
+
+### Mood and Different Events
+
+![Fig A3-g: Distribution of mood across different academic events](C:/Users/Public/MDSI/SEM-2/dsp/at3/image_25.png)
+
+
+
+
+```{r}
+knitr::knit_exit()
+```
+
+
+
